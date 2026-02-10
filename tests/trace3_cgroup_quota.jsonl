@@ -1,0 +1,10 @@
+# Trace 3: cgroup shares + quota/period + burst (run with --cpus 2 --quanta-us 1000)
+{"vtime":0,"events":[{"action":"CGROUP_CREATE","cgroupId":"A","cpuShares":1024,"cpuQuotaUs":-1,"cpuPeriodUs":4000,"cpuMask":[0,1]},{"action":"CGROUP_CREATE","cgroupId":"B","cpuShares":256,"cpuQuotaUs":2000,"cpuPeriodUs":4000,"cpuMask":[0,1]},{"action":"TASK_CREATE","taskId":"A1","nice":0,"cgroupId":"A"},{"action":"TASK_CREATE","taskId":"A2","nice":0,"cgroupId":"A"},{"action":"TASK_CREATE","taskId":"B1","nice":0,"cgroupId":"B"}]}
+{"vtime":1,"events":[]}
+{"vtime":2,"events":[{"action":"CPU_BURST","taskId":"B1","duration":3}]}
+{"vtime":3,"events":[]}
+{"vtime":4,"events":[]}
+{"vtime":5,"events":[]}
+{"vtime":6,"events":[]}
+{"vtime":7,"events":[]}
+{"vtime":8,"events":[]}

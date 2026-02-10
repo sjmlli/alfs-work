@@ -1,0 +1,39 @@
+*** Begin Patch
+*** Update File: src/alfs.c
+@@
+-    bool meta_minimal = false;
++    // Default to schema-safe minimal meta (preemptions/migrations only).
++    bool meta_minimal = true;
+@@
+-        } else if (strcmp(argv[i], "--meta-minimal") == 0) {
+-            meta_minimal = true;
++        } else if (strcmp(argv[i], "--meta-minimal") == 0) {
++            meta_minimal = true;
++        } else if (strcmp(argv[i], "--meta-extra") == 0) {
++            meta_minimal = false;
+         } else {
+             usage(argv[0]);
+             return 1;
+         }
+@@
+-static Task* task_new(const char *id, int nice, Cgroup *cg) {
++static int64_t cgroup_min_vruntime(const Cgroup *cg);
++
++static Task* task_new(const char *id, int nice, Cgroup *cg) {
+     Task *t = calloc(1, sizeof(Task));
+     if (!t) return NULL;
+@@
+-    t->vruntime_us = 0;
++    // Align new task's vruntime with current runqueue to avoid unfair head-start.
++    t->vruntime_us = cgroup_min_vruntime(cg);
+@@
+ }
++
++static int64_t cgroup_min_vruntime(const Cgroup *cg) {
++    if (!cg) return 0;
++    if (cg->task_heap.len == 0) return cg->vruntime_us;
++    // task_heap is a min-heap by (vruntime, tie-breaks), so index 0 is min.
++    const Task *tmin = (const Task*)cg->task_heap.a[0];
++    return tmin ? tmin->vruntime_us : cg->vruntime_us;
++}
+*** End Patch

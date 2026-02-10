@@ -1,0 +1,11 @@
+# Trace 1: nice weights (run with --cpus 1 --quanta-us 1000)
+{"vtime":0,"events":[{"action":"TASK_CREATE","taskId":"T1","nice":0},{"action":"TASK_CREATE","taskId":"T2","nice":10}]}
+{"vtime":1,"events":[]}
+{"vtime":2,"events":[]}
+{"vtime":3,"events":[]}
+{"vtime":4,"events":[]}
+{"vtime":5,"events":[]}
+{"vtime":6,"events":[]}
+{"vtime":7,"events":[]}
+{"vtime":8,"events":[]}
+{"vtime":9,"events":[]}

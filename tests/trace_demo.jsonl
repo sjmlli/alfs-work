@@ -1,0 +1,10 @@
+# Trace 2: block/unblock/yield/affinity (run with --cpus 2 --quanta-us 1000)
+{"vtime":0,"events":[{"action":"TASK_CREATE","taskId":"A","nice":0},{"action":"TASK_CREATE","taskId":"B","nice":0},{"action":"TASK_CREATE","taskId":"C","nice":0},{"action":"TASK_SET_AFFINITY","taskId":"C","cpuMask":[1]}]}
+{"vtime":1,"events":[]}
+{"vtime":2,"events":[{"action":"TASK_BLOCK","taskId":"A"}]}
+{"vtime":3,"events":[{"action":"TASK_YIELD","taskId":"B"}]}
+{"vtime":4,"events":[{"action":"TASK_UNBLOCK","taskId":"A"}]}
+{"vtime":5,"events":[{"action":"TASK_SETNICE","taskId":"C","newNice":-10}]}
+{"vtime":6,"events":[]}
+{"vtime":7,"events":[{"action":"TASK_EXIT","taskId":"B"}]}
+{"vtime":8,"events":[]}
